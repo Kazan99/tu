@@ -1,0 +1,26 @@
+Console.WriteLine("Getting Connection ...");
+            MySqlConnection conn = DBUtils.GetDBConnection();
+
+            try
+            {
+                
+
+                conn.Open();
+
+                //Console.WriteLine("Connection successful!");
+                MessageBox.Show("Connection successful!");
+
+                string sql = "select * from car";
+                MySqlDataAdapter da = new MySqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "car");
+                dataGridView1.DataSource = ds;
+                dataGridView1.DataMember = "car";
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine("Error: " + e.Message);
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            Console.Read();
